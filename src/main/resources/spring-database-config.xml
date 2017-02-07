@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd		">
+
+	<!-- DATABASE -->
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+		depends-on="flyway">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan" value="by.intexsoft.ccm.model.db" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="showSql" value="${db.sql.show}" />
+				<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQL9Dialect" />
+				<property name="database" value="POSTGRESQL" />
+			</bean>
+		</property>
+		<property name="jpaProperties">
+			<props>
+				<prop key="hibernate.hbm2ddl.auto">${db.hibernate.hbm2ddl}</prop>
+				<prop key="hibernate.default_schema">${db.schema}</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="jdbcUrl" value="${db.jdbc.url}" />
+		<property name="user" value="${db.jdbc.user}" />
+		<property name="password" value="${db.jdbc.password}" />
+		<property name="maxPoolSize" value="${db.jdbc.maxPoolSize}" />
+		<property name="minPoolSize" value="${db.jdbc.minPoolSize}" />
+		<property name="maxStatements" value="${db.jdbc.maxStatements}" />
+		<property name="testConnectionOnCheckout" value="${db.jdbc.testConnection}" />
+	</bean>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="exceptionPostProcessor"
+		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+</beans>
