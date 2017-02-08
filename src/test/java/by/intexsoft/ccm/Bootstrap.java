@@ -1,6 +1,3 @@
-/**
- * Copyright (c) 2015 Resolto. All Rights Reserved.
- */
 package by.intexsoft.ccm;
 
 import org.apache.catalina.connector.Connector;
