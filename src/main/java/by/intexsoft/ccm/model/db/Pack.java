@@ -9,11 +9,12 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "PACKS")
-public class Pack extends AbstractEntity {
+public class Pack extends AbstractEntity
+{
 
-    /**
-     * Package name
-     */
-    @Column(nullable = false, unique = true)
-    public String name;
+	/**
+	 * Package name
+	 */
+	@Column(nullable = false, unique = true)
+	public String name;
 }

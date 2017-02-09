@@ -9,6 +9,8 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(Suite.class)
-@SuiteClasses({ProvisionControllerTest.class, PackControllerTest.class, SubscriberControllerTest.class, SubscriberServiceTest.class})
-public class AllTests {
+@SuiteClasses(
+		{ ProvisionControllerTest.class, PackControllerTest.class, SubscriberControllerTest.class, SubscriberServiceTest.class })
+public class AllTests
+{
 }

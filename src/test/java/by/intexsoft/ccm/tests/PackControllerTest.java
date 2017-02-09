@@ -21,56 +21,49 @@ import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class PackControllerTest {
+public class PackControllerTest
+{
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @Mock
-    private PackService packService;
+	@Mock
+	private PackService packService;
 
-    @InjectMocks
-    private PackController packController;
+	@InjectMocks
+	private PackController packController;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(packController)
-                .build();
-    }
+	@Before
+	public void init()
+	{
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(packController).build();
+	}
 
-    @Test
-    public void getAllPacksWithParamsTest() throws Exception {
-        List<Pack> packs = TestDataHelper.getPackList(2);
-        when(packService.findAll(0, 5)).thenReturn(packs);
-        mockMvc.perform(get("/packs").param("limit", "5")
-                .param("offset", "0"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].identity", is(1)))
-                .andExpect(jsonPath("$[0].name", is("Test")))
-                .andExpect(jsonPath("$[1].identity", is(1)))
-                .andExpect(jsonPath("$[1].name", is("Test")));
+	@Test
+	public void getAllPacksWithParamsTest() throws Exception
+	{
+		List<Pack> packs = TestDataHelper.getPackList(2);
+		when(packService.findAll(0, 5)).thenReturn(packs);
+		mockMvc.perform(get("/packs").param("limit", "5").param("offset", "0")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(jsonPath("$", hasSize(2)))
+				.andExpect(jsonPath("$[0].identity", is(1))).andExpect(jsonPath("$[0].name", is("Test")))
+				.andExpect(jsonPath("$[1].identity", is(1))).andExpect(jsonPath("$[1].name", is("Test")));
 
-        verify(packService, times(1)).findAll(0, 5);
-        verifyNoMoreInteractions(packService);
-    }
+		verify(packService, times(1)).findAll(0, 5);
+		verifyNoMoreInteractions(packService);
+	}
 
-    @Test
-    public void getAllPacksWithoutParamsTest() throws Exception {
-        List<Pack> packs = TestDataHelper.getPackList(2);
-        when(packService.findAll(0, 9999)).thenReturn(packs);
-        mockMvc.perform(get("/packs"))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].identity", is(1)))
-                .andExpect(jsonPath("$[0].name", is("Test")))
-                .andExpect(jsonPath("$[1].identity", is(1)))
-                .andExpect(jsonPath("$[1].name", is("Test")));
+	@Test
+	public void getAllPacksWithoutParamsTest() throws Exception
+	{
+		List<Pack> packs = TestDataHelper.getPackList(2);
+		when(packService.findAll(0, 9999)).thenReturn(packs);
+		mockMvc.perform(get("/packs")).andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)).andExpect(jsonPath("$", hasSize(2)))
+				.andExpect(jsonPath("$[0].identity", is(1))).andExpect(jsonPath("$[0].name", is("Test")))
+				.andExpect(jsonPath("$[1].identity", is(1))).andExpect(jsonPath("$[1].name", is("Test")));
 
-        verify(packService, times(1)).findAll(0, 9999);
-        verifyNoMoreInteractions(packService);
-    }
+		verify(packService, times(1)).findAll(0, 9999);
+		verifyNoMoreInteractions(packService);
+	}
 }

@@ -3,23 +3,26 @@ package by.intexsoft.ccm.model.transfer;
 /**
  * Action response
  */
-public class ResponseItem {
+public class ResponseItem
+{
 
-    /**
-     * Identity of {@link by.intexsoft.ccm.model.db.PackHistory}
-     */
-    public long id;
+	/**
+	 * Identity of {@link by.intexsoft.ccm.model.db.PackHistory}
+	 */
+	public long id;
 
-    /**
-     * Conflict message
-     */
-    public String conflict;
+	/**
+	 * Conflict message
+	 */
+	public String conflict;
 
-    public ResponseItem(long id) {
-        this.id = id;
-    }
+	public ResponseItem(long id)
+	{
+		this.id = id;
+	}
 
-    public ResponseItem(String conflict) {
-        this.conflict = conflict;
-    }
+	public ResponseItem(String conflict)
+	{
+		this.conflict = conflict;
+	}
 }

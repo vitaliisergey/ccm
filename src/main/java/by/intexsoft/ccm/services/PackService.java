@@ -7,14 +7,12 @@ import java.util.List;
 /**
  * Service for packs
  */
-public interface PackService {
+public interface PackService
+{
 
-    /**
-     * Find all {@link Pack}s
-     *
-     * @param offset
-     * @param limit
-     * @return {@link List} of {@link Pack}
-     */
-    List<Pack> findAll(int offset, int limit);
+	/**
+	 * Find all {@link Pack}s
+	 * @return {@link List} of {@link Pack}
+	 */
+	List<Pack> findAll(int offset, int limit);
 }

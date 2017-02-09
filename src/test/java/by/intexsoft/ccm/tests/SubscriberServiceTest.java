@@ -18,70 +18,74 @@ import java.util.Date;
 
 import static org.mockito.Mockito.when;
 
-public class SubscriberServiceTest {
+public class SubscriberServiceTest
+{
 
-    private MockMvc mockMvc;
+	private MockMvc mockMvc;
 
-    @Mock
-    private MapperRepository mapperRepository;
+	@Mock
+	private MapperRepository mapperRepository;
 
-    @InjectMocks
-    private SubscriberServiceImpl subscriberService;
+	@InjectMocks
+	private SubscriberServiceImpl subscriberService;
 
-    @Before
-    public void init() {
-        MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders
-                .standaloneSetup(subscriberService)
-                .build();
-    }
+	@Before
+	public void init()
+	{
+		MockitoAnnotations.initMocks(this);
+		mockMvc = MockMvcBuilders.standaloneSetup(subscriberService).build();
+	}
 
-    @Test(expected = ActionException.class)
-    public void activateProductStartAfterActivationTest() throws Exception {
-        Mapper mapper = new Mapper();
-        Product product = new Product();
-        product.start = TestDataHelper.convertJsonDateToDate("2017-05-23T18:25:43.511Z");
-        mapper.product = product;
-        Date activationDate = TestDataHelper.convertJsonDateToDate("2017-04-23T18:25:43.511Z");
-        Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
-        when(mapperRepository.find(1)).thenReturn(mapper);
-        subscriberService.activate(1, 1, activationDate, deactivationDate);
-    }
+	@Test(expected = ActionException.class)
+	public void activateProductStartAfterActivationTest() throws Exception
+	{
+		Mapper mapper = new Mapper();
+		Product product = new Product();
+		product.start = TestDataHelper.convertJsonDateToDate("2017-05-23T18:25:43.511Z");
+		mapper.product = product;
+		Date activationDate = TestDataHelper.convertJsonDateToDate("2017-04-23T18:25:43.511Z");
+		Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
+		when(mapperRepository.find(1)).thenReturn(mapper);
+		subscriberService.activate(1, 1, activationDate, deactivationDate);
+	}
 
-    @Test(expected = ActionException.class)
-    public void activateProductEndEqualsDeactivationTest() throws Exception {
-        Mapper mapper = new Mapper();
-        Product product = new Product();
-        product.start = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
-        product.end = TestDataHelper.convertJsonDateToDate("2017-02-23T18:25:43.511Z");
-        mapper.product = product;
-        Date activationDate = TestDataHelper.convertJsonDateToDate("2017-04-23T18:25:43.511Z");
-        Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-02-23T18:25:43.511Z");
-        when(mapperRepository.find(1)).thenReturn(mapper);
-        subscriberService.activate(1, 1, activationDate, deactivationDate);
-    }
+	@Test(expected = ActionException.class)
+	public void activateProductEndEqualsDeactivationTest() throws Exception
+	{
+		Mapper mapper = new Mapper();
+		Product product = new Product();
+		product.start = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
+		product.end = TestDataHelper.convertJsonDateToDate("2017-02-23T18:25:43.511Z");
+		mapper.product = product;
+		Date activationDate = TestDataHelper.convertJsonDateToDate("2017-04-23T18:25:43.511Z");
+		Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-02-23T18:25:43.511Z");
+		when(mapperRepository.find(1)).thenReturn(mapper);
+		subscriberService.activate(1, 1, activationDate, deactivationDate);
+	}
 
-    @Test(expected = ActionException.class)
-    public void activateProductEndBeforeDeactivationTest() throws Exception {
-        Mapper mapper = new Mapper();
-        Product product = new Product();
-        product.start = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
-        product.end = TestDataHelper.convertJsonDateToDate("2017-02-23T18:25:43.511Z");
-        mapper.product = product;
-        Date activationDate = TestDataHelper.convertJsonDateToDate("2017-04-23T18:25:43.511Z");
-        Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
-        when(mapperRepository.find(1)).thenReturn(mapper);
-        subscriberService.activate(1, 1, activationDate, deactivationDate);
-    }
+	@Test(expected = ActionException.class)
+	public void activateProductEndBeforeDeactivationTest() throws Exception
+	{
+		Mapper mapper = new Mapper();
+		Product product = new Product();
+		product.start = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
+		product.end = TestDataHelper.convertJsonDateToDate("2017-02-23T18:25:43.511Z");
+		mapper.product = product;
+		Date activationDate = TestDataHelper.convertJsonDateToDate("2017-04-23T18:25:43.511Z");
+		Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
+		when(mapperRepository.find(1)).thenReturn(mapper);
+		subscriberService.activate(1, 1, activationDate, deactivationDate);
+	}
 
-    @Test(expected = ActionException.class)
-    public void deactivateTest() throws Exception {
-        Mapper mapper = new Mapper();
-        Product product = new Product();
-        product.end = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
-        mapper.product = product;
-        when(mapperRepository.find(1)).thenReturn(mapper);
-        Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
-        subscriberService.deactivate(1, 1, 1, deactivationDate);
-    }
+	@Test(expected = ActionException.class)
+	public void deactivateTest() throws Exception
+	{
+		Mapper mapper = new Mapper();
+		Product product = new Product();
+		product.end = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
+		mapper.product = product;
+		when(mapperRepository.find(1)).thenReturn(mapper);
+		Date deactivationDate = TestDataHelper.convertJsonDateToDate("2017-03-23T18:25:43.511Z");
+		subscriberService.deactivate(1, 1, 1, deactivationDate);
+	}
 }

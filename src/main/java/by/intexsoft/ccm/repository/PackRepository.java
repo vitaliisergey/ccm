@@ -6,5 +6,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * {@link org.springframework.data.repository.Repository} for {@link Pack}
  */
-public interface PackRepository extends PagingAndSortingRepository<Pack, Long> {
+public interface PackRepository extends PagingAndSortingRepository<Pack, Long>
+{
 }

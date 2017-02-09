@@ -1,5 +1,6 @@
 package by.intexsoft.ccm.model.db;
 
-public enum ActionType {
-    ACTIVATE,	DEACTIVATE
+public enum ActionType
+{
+	ACTIVATE, DEACTIVATE
 }

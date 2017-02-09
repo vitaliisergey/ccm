@@ -5,21 +5,22 @@ import java.util.Date;
 /**
  * Activate action model
  */
-public class ActivateRequestItem {
+public class ActivateRequestItem
+{
 
-    /**
-     * Identity of {@link by.intexsoft.ccm.model.db.Pack}
-     */
-    public long packId;
+	/**
+	 * Identity of {@link by.intexsoft.ccm.model.db.Pack}
+	 */
+	public long packId;
 
-    /**
-     * Activation date
-     */
-    public Date activateDate;
+	/**
+	 * Activation date
+	 */
+	public Date activateDate;
 
-    /**
-     * Deactivation date
-     */
-    public Date deactivateDate;
+	/**
+	 * Deactivation date
+	 */
+	public Date deactivateDate;
 
 }
